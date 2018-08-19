@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="ticket")
-public class Ticket {
+public class Ticket implements Serializable{ // for distributed caching serializable is needed.
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
