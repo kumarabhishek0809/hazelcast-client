@@ -17,7 +17,7 @@ public class TicketBookingService {
 	@Autowired
 	private TicketBookingDao ticketBookingDao;
 	
-	@Cacheable(value="ticketsCache",key="#ticketId")
+	@Cacheable(value="ticketsCache",key="#ticketId" ,unless="#result==null")
 	/*
 	 * Puts the return value with key specified.
 	 */
