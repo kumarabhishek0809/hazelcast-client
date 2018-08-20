@@ -48,3 +48,13 @@ http://localhost:9192/api/tickets/ticket/{ticketId}
 ----------------------------------------------------------------------------------
 updateTicket::
 http://localhost:9192/api/tickets/ticket/{ticketId}/{newEmail:.+}
+
+Introducing Kitematic.
+docker run -d centos tail -f /dev/null
+docker exec -it wonderful_lamarr
+
+gradle buildDocker -Ppush
+
+docker login
+
+vaishnavi@vaishnavi-ThinkPad-T470-W10DG:~/IdeaProjects/spring-boot-cache-docker$ docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -tspring-boot-cache-9192 . 
