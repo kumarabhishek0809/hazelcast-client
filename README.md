@@ -53,8 +53,13 @@ Introducing Kitematic.
 docker run -d centos tail -f /dev/null
 docker exec -it wonderful_lamarr
 
+docker login
 gradle buildDocker -Ppush
 
-docker login
 
-vaishnavi@vaishnavi-ThinkPad-T470-W10DG:~/IdeaProjects/spring-boot-cache-docker$ docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -tspring-boot-cache-9192 . 
+
+
+docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache .
+docker rmi -f image spring-boot-cache
+docker images 
+docker run -p 9192:9192 spring-boot-cache:latest
