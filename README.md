@@ -34,7 +34,7 @@ SQL> create table ticket (ticket_id number,booking_date date,destination_station
 
 INSERT INTO "CACHE"."TICKET" ("TICKET_ID", "BOOKING_DATE", "DESTINATION_STATION", "EMAIL", "PASSENGER_NAME", "SOURCE_STATION") VALUES (1, TO_DATE('2017-07-19 11:41:36', 'YYYY-MM-DD HH24:MI:SS'), 'PUNE', 'KUMAR.ABHISHEK0809@GMAIL.COM', 'KUMAR', 'DELHI');
 
-INSERT INTO "CACHE"."TICKET" ("TICKET_ID", "BOOKING_DATE", "DESTINATION_STATION", "EMAIL", "PASSENGER_NAME", "SOURCE_STATION") VALUES ((SELECT MAX(TICKET_ID) + 1 FROM TICKET ) , TO_DATE('2017-07-19 11:41:36', 'YYYY-MM-DD HH24:MI:SS'), 'PUNE', 'KUMAR.ABHISHEK0809@GMAIL.COM', 'KUMAR', 'DELHI');
+INSERT INTO "CACHE"."TICKET" ("TICKET_ID", "BOOKING_DATE", "DESTINATION_STATION", "EMAIL", "PASSENGER_NAME", "SOURCE_STATION") VALUES ((SELECT NVL(MAX(TICKET_ID),0) + 1 FROM TICKET ) , TO_DATE('2017-07-19 11:41:36', 'YYYY-MM-DD HH24:MI:SS'), 'PUNE', 'KUMAR.ABHISHEK0809@GMAIL.COM', 'KUMAR', 'DELHI');
 
 
 
@@ -56,10 +56,9 @@ docker exec -it wonderful_lamarr
 docker login
 gradle buildDocker -Ppush
 
-
-
-
-docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache .
 docker rmi -f image spring-boot-cache
+docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache-9192 .
+docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache-9190 .
+docker inspect oracleDB .
 docker images 
-docker run -p 9192:9192 spring-boot-cache:latest
+docker run -p 9190:9190 spring-boot-cache-9190:latest
