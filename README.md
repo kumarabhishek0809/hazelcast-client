@@ -56,9 +56,36 @@ docker exec -it wonderful_lamarr
 docker login
 gradle buildDocker -Ppush
 
-docker rmi -f image spring-boot-cache
-docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache-9192 .
 docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache-9190 .
 docker inspect oracleDB .
 docker images 
+
+
+#For multiple servers.
+#Change  into Dockerfile for port.
+docker rmi -f image spring-boot-cache-9191
+docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache-9191 .
 docker run -p 9190:9190 spring-boot-cache-9190:latest
+
+
+
+docker rmi -f image spring-boot-cache
+docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache-9191 .
+docker run -p 9191:9191 spring-boot-cache-9191:latest
+
+-------------------------Intializing Hazel Cast.
+https://www.youtube.com/watch?v=-_OY-cI0WO4
+
+https://hub.docker.com/r/hazelcast/hazelcast/
+docker pull hazelcast/hazelcast
+docker run --name hazelcast-5701 -p 5701:5701 hazelcast/hazelcast:latest
+docker run --name hazelcast-5702 -p 5702:5702 hazelcast/hazelcast:latest
+#172.17.0.3
+#172.17.0.4
+$ docker run -e JAVA_OPTS="-Dhazelcast.local.publicAddress=<host_ip>:5701" -p 5701:5701 hazelcast/hazelcast
+$ docker run -e JAVA_OPTS="-Dhazelcast.local.publicAddress=<host_ip>:5702" -p 5702:5701 hazelcast/hazelcast 
+
+docker pull hazelcast/management-center
+docker run --name hazelcastManager -p hazelcast/management-center:latest
+http://localhost:32774/hazelcast-mancenter/login.html
+https://stackoverflow.com/questions/20385973/how-do-you-programmatically-configure-hazelcast-for-the-multicast-discovery-mech
