@@ -14,7 +14,7 @@ public class Application {
         public static void main(String[] args) {
         	 new SpringApplicationBuilder()
              .sources(Application.class)
-             .profiles("client")
+             //.profiles("client") spring.profiles.active
              //.profiles("server")
              .run(args);
         	
