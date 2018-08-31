@@ -57,7 +57,7 @@ public class HazelcastServerConfiguration {
 		config.addListenerConfig(new ListenerConfig("com.example.demo.listener.ClusterMembershipListener"));
 		config.addListenerConfig(new ListenerConfig("com.example.demo.listener.SampleDistributedObjectListener"));
 		config.addListenerConfig(new ListenerConfig("com.example.demo.listener.ClusterMigrationListener"));
-		config.addListenerConfig(new ListenerConfig("com.example.demo.listener.MapEntryListener"));
+		//config.addListenerConfig(new ListenerConfig("com.example.demo.listener.MapEntryListener"));
 		
 		//networkConfig.setPortAutoIncrement(false); //Port [5701] is already in use and auto-increment is disabled. Hazelcast cannot start.
 		return config;

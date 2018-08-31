@@ -22,7 +22,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'docker'
 
 jar {
-    baseName = 'spring-boot-cache'
+    baseName = 'com.hazelcast.client'
     version =  '0.0.1-SNAPSHOT'
 }
 version = '0.0.1-SNAPSHOT'
@@ -31,7 +31,7 @@ sourceCompatibility = 10
 
 task buildDocker(type: Docker, dependsOn: build) {
   push = project.hasProperty('push')
-  tag = 'kumarabhishek0809/spring-boot-cache'
+  tag = 'kumarabhishek0809/com-hazelcast-client'
   applicationName = jar.baseName
   dockerfile = file('src/main/docker/Dockerfile')
   doFirst {
@@ -88,6 +88,9 @@ dependencies {
     compile group: 'javax.activation', name: 'activation', version: '1.1.1'
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
+	compile group: 'com.hazelcast', name: 'hazelcast-hibernate5', version: '1.0'
+	compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.6.Final'
+	compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.6.Final'
 }
 
 dependencyManagement {

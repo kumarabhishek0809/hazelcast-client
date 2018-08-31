@@ -1,6 +1,8 @@
 
-Why Hazelcast, Because it is clsustered, It Implements JSR 107, Supports JCache.
-
+Why Hazelcast, Because it is clustered, It Implements JSR 107, Supports JCache.
+-- Hazelcast is in memory Caching solution it usase inmemory Data grid.
+-- Hazelcast is written in Java.
+-- Easy to implement have enoroums support for Spring and hibernate.
 https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-caching.html 
 
 
@@ -46,12 +48,17 @@ https://www.youtube.com/watch?v=-_OY-cI0WO4
 
 https://hub.docker.com/r/hazelcast/hazelcast/
 docker pull hazelcast/hazelcast
-docker run --name hazelcast-5701 -p 5701:5701 hazelcast/hazelcast:latest
-docker run --name hazelcast-5702 -p 5702:5702 hazelcast/hazelcast:latest
+
+--For multiple hazel cast instances.
+docker run --name hazelcast-5701 -p 5701:5701 hazelcast/hazelcast
+docker run --name hazelcast-5702 -p 5702:5701 hazelcast/hazelcast
+docker run -d --name hazelcast-mgmt -p 38080:38080 hazelcast/management-center:latest
+
+Use command docker inspect to know the management IP and Port
+http://localhost:38080/hazelcast-mancenter/
+
 #172.17.0.3
 #172.17.0.4
-$ docker run -e JAVA_OPTS="-Dhazelcast.local.publicAddress=<host_ip>:5701" -p 5701:5701 hazelcast/hazelcast
-$ docker run -e JAVA_OPTS="-Dhazelcast.local.publicAddress=<host_ip>:5702" -p 5702:5701 hazelcast/hazelcast 
 
 docker pull hazelcast/management-center
 docker run --name hazelcastManager -p hazelcast/management-center:latest
