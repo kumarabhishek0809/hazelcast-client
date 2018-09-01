@@ -51,9 +51,7 @@ docker pull hazelcast/hazelcast
 
 --For multiple hazel cast instances.
 --Add 3 clustered members
-docker run --name hazelcast-5701 -p 5701:5701 hazelcast/hazelcast
-docker run --name hazelcast-5702 -p 5702:5701 hazelcast/hazelcast
-docker run --name hazelcast-5703 -p 5703:5701 hazelcast/hazelcast
+docker run -d --name hazelcast -p 127.0.0.1:5701:5701 hazelcast/hazelcast
 docker run -d --name hazelcast-mgmt -p 38080:38080 hazelcast/management-center:latest
 
 Use command docker inspect to know the management IP and Port

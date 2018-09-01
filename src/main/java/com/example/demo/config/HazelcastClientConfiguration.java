@@ -15,14 +15,13 @@ public class HazelcastClientConfiguration {
 	@Bean
 	public ClientConfig clientConfig() {
 		ClientConfig clientConfig = new ClientConfig();
-		ClientNetworkConfig networkConfig = clientConfig.getNetworkConfig();
-		networkConfig.addAddress("172.17.0.1","172.17.0.2")
-		             .setSmartRouting(true)
-		             .addOutboundPortDefinition("5701-5710")
-		             .setRedoOperation(true)
-		             .setConnectionTimeout(5000)
-		             .setConnectionAttemptLimit(5);
-		
+		clientConfig.getNetworkConfig().addAddress("127.0.0.1");
+		// .setSmartRouting(true)
+//				.addOutboundPortDefinition("34700-34710").setRedoOperation(true).setConnectionTimeout(5000)
+//				.setConnectionAttemptLimit(5);
+		clientConfig.getGroupConfig().setName("dev").setPassword("dev-pass");
+		clientConfig.setInstanceName("hazelcast-instance");
+
 		return clientConfig;
 
 	}

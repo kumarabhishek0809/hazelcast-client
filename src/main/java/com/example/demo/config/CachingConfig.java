@@ -23,11 +23,11 @@ public class CachingConfig {
 	 */
 
 	@Autowired
-	private HazelcastInstance hazelCastConfig;
+	private HazelcastInstance hazelcastInstance;
 
 	@Bean
 	public CacheManager cacheManager() {
-		return new HazelcastCacheManager(hazelCastConfig);
+		return new HazelcastCacheManager(hazelcastInstance);
 	}
 
 	@Bean
