@@ -36,34 +36,27 @@ pushing the jar file on docker hub. gradle buildDocker -Ppush
 #For multiple servers.
 #Change  into Dockerfile for port.
 gradle clean build
-docker rmi -f image hazelcast-client-9191
 docker build -f /home/vaishnavi/IdeaProjects/hazelcast-client/src/main/docker/Dockerfile -t hazelcast-client .
-docker run -p 9191:9191 hazelcast-client-9191:latest
+
 
 #Linking container.
-docker run --name hazelcast-client -p  9191:9191 --link oracleDB:oracleDB -e SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracleDB:1521:xe -e SERVER_PORT=9191 hazelcast-client
+docker run --name hazelcast-client-9191 -p  9191:9191 --link oracleDB:oracleDB -e SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracleDB:1521:xe -e SERVER_PORT=9191 hazelcast-client
 
-#Change the Port to 9190 and run another instance.
-docker run -p 9190:9190 spring-boot-cache-9190:latest
+docker run --name hazelcast-client-9191 -p  9191:9191 --link oracleDB:oracleDB -e SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracleDB:1521:xe -e SERVER_PORT=9191 hazelcast-client
 
---Intializing Hazel Cast.
-https://www.youtube.com/watch?v=-_OY-cI0WO4
+docker run --name hazelcast-client-9191 -p  9191:9191 --link oracleDB:oracleDB -e SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracleDB:1521:xe -e SERVER_PORT=9191 hazelcast-client
+
 
 https://hub.docker.com/r/hazelcast/hazelcast/
 docker pull hazelcast/hazelcast
 
---For multiple hazel cast instances.
---Add 3 clustered members
-docker run -d --name hazelcast -p 127.0.0.1:5701:5701 hazelcast/hazelcast
-docker run -d --name hazelcast-mgmt -p 38080:38080 hazelcast/management-center:latest
+docker run -d --name hazelcast-5701 -p 127.0.0.1:5701:5701 hazelcast/hazelcast
 
-Use command docker inspect to know the management IP and Port
-http://localhost:38080/hazelcast-mancenter/
-
-docker run --name hazelcastManager -p hazelcast/management-center:latest
+#References 
 http://localhost:32774/hazelcast-mancenter/login.html
 https://stackoverflow.com/questions/20385973/how-do-you-programmatically-configure-hazelcast-for-the-multicast-discovery-mech
-
+--Intializing Hazel Cast.
+https://www.youtube.com/watch?v=-_OY-cI0WO4
 
 
 ----------------------------------------------------------------------------------
