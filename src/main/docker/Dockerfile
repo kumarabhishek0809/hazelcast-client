@@ -1,4 +1,3 @@
 FROM openjdk:10-jdk
-ADD /build/libs/spring-boot-cache-0.0.1-SNAPSHOT.jar spring-boot-cache.jar
-EXPOSE 9191:9191
-ENTRYPOINT ["java","-Dserver.port=9191","-jar","spring-boot-cache.jar"]
+ADD /build/libs/hazelcast-client-0.0.1-SNAPSHOT.jar hazelcast-client.jar
+ENTRYPOINT ["java","-jar","hazelcast-client.jar"]

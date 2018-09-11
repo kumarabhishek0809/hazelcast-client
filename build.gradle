@@ -87,7 +87,7 @@ dependencies {
     compile group: 'javax.activation', name: 'activation', version: '1.1.1'
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.0'
-	compile group: 'com.hazelcast', name: 'hazelcast-hibernate5', version: '1.0'
+	compile group: 'com.hazelcast', name: 'hazelcast-hibernate52', version: '1.2.3'
 	compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.17.Final'
 	compile group: 'com.hazelcast', name: 'hazelcast-hibernate', version: '3.8.2'
 	

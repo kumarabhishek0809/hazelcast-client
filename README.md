@@ -26,22 +26,25 @@ Create Table.
 create table ticket (ticket_id number,booking_date date,destination_station varchar2(255),email varchar2(255),passenger_name varchar2(255),source_station varchar2(255));
 
 --Insert Scripts.
-INSERT INTO "CACHE"."TICKET" ("TICKET_ID", "BOOKING_DATE", "DESTINATION_STATION", "EMAIL", "PASSENGER_NAME", "SOURCE_STATION") VALUES ((SELECT NVL(MAX(TICKET_ID),0) + 1 FROM TICKET ) , TO_DATE('2017-07-19 11:41:36', 'YYYY-MM-DD HH24:MI:SS'), 'PUNE', 'KUMAR.ABHISHEK0809@GMAIL.COM', 'KUMAR', 'DELHI');
+INSERT INTO "TICKET" ("TICKET_ID", "BOOKING_DATE", "DESTINATION_STATION", "EMAIL", "PASSENGER_NAME", "SOURCE_STATION") VALUES ((SELECT MAX(TICKET_ID)+ 1 FROM TICKET ) , TO_DATE('2017-07-19 11:41:36', 'YYYY-MM-DD HH24:MI:SS'), 'PUNE', 'KUMAR.ABHISHEK0809@GMAIL.COM', 'KUMAR', 'DELHI');
 
 ----------------------------------------------------------------------------------
 pushing the jar file on docker hub. gradle buildDocker -Ppush
 
 --pushing file on local docker.
-docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache-9190 .
+--the port is same like in your docker file.
 #For multiple servers.
 #Change  into Dockerfile for port.
-docker rmi -f image spring-boot-cache-9191
-docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache-9191 .
-docker run -p 9190:9190 spring-boot-cache-9190:latest
+gradle clean build
+docker rmi -f image hazelcast-client-9191
+docker build -f /home/vaishnavi/IdeaProjects/hazelcast-client/src/main/docker/Dockerfile -t hazelcast-client .
+docker run -p 9191:9191 hazelcast-client-9191:latest
 
-docker rmi -f image spring-boot-cache
-docker build -f /home/vaishnavi/IdeaProjects/spring-boot-cache-docker/src/main/docker/Dockerfile -t spring-boot-cache-9191 .
-docker run -p 9191:9191 spring-boot-cache-9191:latest
+#Linking container.
+docker run --name hazelcast-client -p  9191:9191 --link oracleDB:oracleDB -e SPRING_DATASOURCE_URL=jdbc:oracle:thin:@oracleDB:1521:xe -e SERVER_PORT=9191 hazelcast-client
+
+#Change the Port to 9190 and run another instance.
+docker run -p 9190:9190 spring-boot-cache-9190:latest
 
 --Intializing Hazel Cast.
 https://www.youtube.com/watch?v=-_OY-cI0WO4
